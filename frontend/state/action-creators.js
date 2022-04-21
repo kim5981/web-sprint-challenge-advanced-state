@@ -1,4 +1,5 @@
 import * as types from "./action-types"
+import axios from "axios";
 
 // ❗ You don't need to add extra action creators to achieve MVP
 
@@ -25,7 +26,13 @@ export function fetchQuiz() {
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
-    
+    axios.get(`http://localhost:9000/api/quiz/next`)
+      .then(res => {
+        dispatch(setQuiz( res.data ))
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
 export function postAnswer() {
