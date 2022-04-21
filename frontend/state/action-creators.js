@@ -4,21 +4,33 @@ import axios from "axios";
 // ❗ You don't need to add extra action creators to achieve MVP
 
 
-export function moveClockwise() { }
-
-export function moveCounterClockwise() { }
-
-export function selectAnswer() { }
-
-export function setMessage() { }
-
-export function setQuiz(ask) {
-  return { type: types.SET_QUIZ_INTO_STATE, payload: ask}
+export function moveClockwise(input) {
+  return { type: types.MOVE_CLOCKWISE, payload: input }
  }
 
-export function inputChange() { }
+export function moveCounterClockwise(input) { 
+  return { type: types.MOVE_COUNTERCLOCKWISE, payload: input }
+}
 
-export function resetForm() { }
+export function selectAnswer(id) {
+  return { type: types.SET_SELECTED_ANSWER, payload: id }
+ }
+
+export function setMessage(msg) { 
+  return { type: types.SET_INFO_MESSAGE, payload: msg }
+}
+
+export function setQuiz(ask) {
+  return { type: types.SET_QUIZ_INTO_STATE, payload: ask }
+ }
+
+export function inputChange(values) {
+  return { type: types.INPUT_CHANGE, payload: values }
+ }
+
+export function resetForm() {
+  return { type: types.RESET_FORM }
+ }
 
 // ❗ Async action creators
 export function fetchQuiz() {
