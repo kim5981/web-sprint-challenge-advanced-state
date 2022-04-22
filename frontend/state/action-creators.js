@@ -57,7 +57,7 @@ export function fetchQuiz() {
           .then(res => {
             dispatch(selectAnswer(null));
             dispatch(setMessage(res.data.message));
-            dispatch(setQuiz());
+            dispatch(setQuiz(null));
             dispatch(fetchQuiz());
           })
           .catch((err) => {
