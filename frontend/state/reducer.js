@@ -9,7 +9,7 @@ const initialWheelState = { counter: 0 }
 function wheel(state = initialWheelState, action) {
   switch (action.type) {
     case types.MOVE_CLOCKWISE :
-      if ( state.counter > 0) {
+      if ( state.counter >= 1) {
         return {
           ...state,
           counter: state.counter - 1,
@@ -21,7 +21,7 @@ function wheel(state = initialWheelState, action) {
         }
       }
     case types.MOVE_COUNTERCLOCKWISE :
-      if ( state.counter < 6) {
+      if ( state.counter <= 4) {
         return {
           ...state,
           counter: state.counter + 1
