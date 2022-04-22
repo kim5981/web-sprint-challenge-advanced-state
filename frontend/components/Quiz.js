@@ -5,7 +5,7 @@ import * as actions from "../state/action-creators";
 import { fetchQuiz, selectAnswer } from '../state/action-creators';
 
 export function Quiz(props) {
-  const { quiz, fetchQuiz, selectedAnswer, postAnswer } = props;
+  const { quiz, fetchQuiz, selectedAnswer, selectAnswer, postAnswer } = props;
 
   const selectHandler = id => {
     selectAnswer(id)
