@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 
-import * as actions from "../state/action-creators";
-import { fetchQuiz, selectAnswer } from '../state/action-creators';
+import { fetchQuiz, selectAnswer, postAnswer } from "../state/action-creators";
 
-export function Quiz(props) {
+
+function Quiz(props) {
   const { quiz, fetchQuiz, selectedAnswer, selectAnswer, postAnswer } = props;
 
   const selectHandler = id => {
@@ -16,10 +16,12 @@ export function Quiz(props) {
     fetchQuiz()
   }, []);
 
-
   const onSubmit = evt => {
     evt.preventDefault()
-    postAnswer()
+    postAnswer({
+      quiz_id: quiz.quiz_id,
+      answer_id: selectedAnswer,
+    })
   }
 
   return (
@@ -29,17 +31,21 @@ export function Quiz(props) {
             <h2>{ quiz.question }</h2>
 
             <div id="quizAnswers">
+              { /*answer 1*/}
               <div className={ `answer ${ selectedAnswer === quiz.answers[0]
                 ? "selected"
                 : null }`}
               >
                 { quiz.answers[0].text }
-                <button>
-                { selectedAnswer === quiz.answers[0].answer_id ? "SELECTED" : "Select" }
+                <button onClick={ () => selectHandler(quiz.answers[0].answer_id) }>
+                { selectedAnswer === quiz.answers[0].answer_id 
+                ? "SELECTED" 
+                : "Select" }
                 </button>
               </div>
 
               <div className="answer">
+              { /*answer 1*/}
                 An elephant
                 <button>
                   Select
@@ -64,8 +70,9 @@ export function Quiz(props) {
 
 const mapStateToProps = (state) => {
   return {
-    quiz: state.quiz
+    quiz: state.quiz,
+    selectedAnswer: state.selectedAnswer
   }
 }
 
-export default connect(mapStateToProps, { fetchQuiz })(Quiz);
+export default connect(mapStateToProps, { fetchQuiz, selectAnswer, postAnswer })(Quiz);
