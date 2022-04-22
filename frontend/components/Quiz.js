@@ -2,28 +2,39 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 
 import * as actions from "../state/action-creators";
-import { fetchQuiz } from '../state/action-creators';
+import { fetchQuiz, selectAnswer } from '../state/action-creators';
 
 export function Quiz(props) {
-  const { quiz, fetchQuiz } = props;
+  const { quiz, fetchQuiz, selectedAnswer, postAnswer } = props;
+
+  const selectHandler = id => {
+    selectAnswer(id)
+  } 
 
   useEffect( () => {
     fetchQuiz()
   }, []);
 
+
+  const onSubmit = evt => {
+    evt.preventDefault()
+    postAnswer()
+  }
+
   return (
     <div id="wrapper">
-      {
-        // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-        quiz ? (
+      { quiz ? (
           <>
             <h2>{ quiz.question }</h2>
 
             <div id="quizAnswers">
-              <div className="answer selected">
-                A function
+              <div className={ `answer ${ selectedAnswer === quiz.answers[0]
+                ? "selected"
+                : null }`}
+              >
+                { quiz.answers[0].text }
                 <button>
-                  SELECTED
+                { selectedAnswer === quiz.answers[0].answer_id ? "SELECTED" : "Select" }
                 </button>
               </div>
 
@@ -35,7 +46,13 @@ export function Quiz(props) {
               </div>
             </div>
 
-            <button id="submitAnswerBtn">Submit answer</button>
+            <button 
+              id="submitAnswerBtn"
+              disabled={ !selectAnswer }
+              onClick={ onSubmit }
+            >
+            Submit answer
+            </button>
           </>
         ) 
         : 'Loading next quiz...'
