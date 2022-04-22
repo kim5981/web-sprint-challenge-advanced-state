@@ -12,8 +12,8 @@ export function moveCounterClockwise() {
   return { type: types.MOVE_COUNTERCLOCKWISE }
 }
 
-export function selectAnswer(answerId) {
-  return { type: types.SET_SELECTED_ANSWER, payload: answerId }
+export function selectAnswer(answer_id) {
+  return { type: types.SET_SELECTED_ANSWER, payload: answer_id }
  }
 
 export function setMessage(msg) { 
@@ -54,10 +54,10 @@ export function fetchQuiz() {
       return function (dispatch) {
         axios
           .post("http://localhost:9000/api/quiz/answer", { quiz_id, answer_id })
-          .then((res) => {
+          .then(res => {
             dispatch(selectAnswer(null));
             dispatch(setMessage(res.data.message));
-            dispatch(setQuiz(null));
+            dispatch(setQuiz());
             dispatch(fetchQuiz());
           })
           .catch((err) => {
