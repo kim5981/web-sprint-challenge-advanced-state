@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as actionCreators from '../state/action-creators'
+import * as actions from '../state/action-creators'
 
 export function Form(props) {
 
@@ -30,25 +30,25 @@ export function Form(props) {
   }
 
   return (
-    <form id="form" onSubmit={onSubmit}>
+    <form id="form" onSubmit={ onSubmit }>
       <h2>Create New Quiz</h2>
       <input 
-        maxLength={50} 
-        onChange={onChange}
+        maxLength={ 50 } 
+        onChange={ onChange }
         id="newQuestion" 
         placeholder="Enter question"
         value={ form.newQuestion }
       />
       <input 
-        maxLength={50}
-        onChange={onChange} 
+        maxLength={ 50 }
+        onChange={ onChange } 
         id="newTrueAnswer" 
         placeholder="Enter true answer" 
         value={ form.newTrueAnswer }
       />
       <input
-        maxLength={50}
-        onChange={onChange}
+        maxLength={ 50 }
+        onChange={ onChange }
         id="newFalseAnswer"
         placeholder="Enter false answer"
         value={ form.newFalseAnswer }
@@ -63,10 +63,6 @@ export function Form(props) {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    form: state.form,
-  }
-}
 
-export default connect(mapStateToProps, actionCreators)(Form)
+
+export default connect ( s => s, actions )(Form)
