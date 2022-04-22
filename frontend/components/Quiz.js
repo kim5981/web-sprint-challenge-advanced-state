@@ -33,11 +33,9 @@ export function Quiz(props) {
 
             <div id="quizAnswers">
 
-              { /*answer 1*/}
 
               <div className={ `${ 
-                selectedAnswer === quiz.answers[0].answer_id && 
-                selectedAnswer != quiz.answers[1]
+                selectedAnswer === quiz.answers[0].answer_id
                 ? "selected answer"
                 : "answer" 
                 }`}
@@ -52,10 +50,9 @@ export function Quiz(props) {
                 </button>
               </div>
 
-              { /*answer 2*/}
+            
               <div className={ `${ 
-                selectedAnswer === quiz.answers[1].answer_id && 
-                selectedAnswer != quiz.answers[0]
+                selectedAnswer === quiz.answers[1].answer_id
                 ? "selected answer"
                 : "answer" 
                 }`}
@@ -73,7 +70,7 @@ export function Quiz(props) {
 
             <button 
               id="submitAnswerBtn"
-              disabled={ !selectAnswer }
+              disabled={ !selectedAnswer }
               onClick={ onSubmit }
             >
             Submit answer
