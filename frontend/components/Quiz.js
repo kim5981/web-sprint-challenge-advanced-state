@@ -11,6 +11,7 @@ export function Quiz(props) {
     selectAnswer(id)
   } 
 
+  // get data from api on load
   useEffect( () => {
     fetchQuiz()
   }, []);
