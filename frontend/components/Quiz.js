@@ -7,8 +7,8 @@ import { fetchQuiz, selectAnswer, postAnswer } from "../state/action-creators";
 function Quiz(props) {
   const { quiz, fetchQuiz, selectedAnswer, selectAnswer, postAnswer } = props;
 
-  const selectHandler = id => {
-    selectAnswer(id)
+  const selectHandler = (answer_id) => {
+    selectAnswer(answer_id)
   } 
 
   // get data from api on load
@@ -33,26 +33,36 @@ function Quiz(props) {
             <div id="quizAnswers">
 
               { /*answer 1*/}
-              <div className={ `${ selectedAnswer === quiz.answers[0].answer_id
+              <div className={ `${ 
+                selectedAnswer === quiz.answers[0].answer_id
                 ? "selected answer"
-                : "answer" }`}
+                : "answer" 
+                }`}
               >
+
                 { quiz.answers[0].text }
+
                 <button onClick={ () => selectHandler(quiz.answers[0].answer_id) }>
-                { selectedAnswer === quiz.answers[0].answer_id 
-                ? "SELECTED" 
-                : "Select" }
+                  { selectedAnswer === quiz.answers[0].answer_id 
+                  ? "SELECTED" 
+                  : "Select" }
                 </button>
               </div>
 
               { /*answer 2*/}
-              <div className={ `${ selectedAnswer === quiz.answers[1].answer_id
+              <div className={ `${ 
+                selectedAnswer === quiz.answers[1].answer_id
                 ? "selected answer"
-                : "answer" }`}>
+                : "answer" 
+                }`}
+              >
               
-                An elephant
+                { quiz.answers[1].text }
+
                 <button>
-                  Select
+                  { selectedAnswer === quiz.answers[0].answer_id 
+                  ? "SELECTED" 
+                  : "Select" }
                 </button>
               </div>
             </div>
