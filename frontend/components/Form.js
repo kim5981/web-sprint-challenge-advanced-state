@@ -8,7 +8,6 @@ export function Form(props) {
 
   const onChange = evt => {
     const { value, id } = evt.target
-
     inputChange({ [id]: value }); 
   }
 
@@ -23,9 +22,9 @@ export function Form(props) {
 
   const disabledBtnHandler = () => {
       return (
-        form.newQuestion.trim().length < 1 ||
-        form.newTrueAnswer.trim().length < 1 ||
-        form.newFalseAnswer.trim().length < 1
+        form.newQuestion.trim("").length < 2 ||
+        form.newTrueAnswer.trim("").length < 2 ||
+        form.newFalseAnswer.trim("").length < 2
       )
   }
 

@@ -9,6 +9,7 @@ function wheel(state = initialWheelState, action) {
   return state
 }
 
+
 const initialQuizState = ""
 
 function quiz(state = initialQuizState, action) {
@@ -24,7 +25,9 @@ function quiz(state = initialQuizState, action) {
   }
 }
 
-const initialSelectedAnswerState = null
+
+const initialSelectedAnswerState = ""
+
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case types.SET_SELECTED_ANSWER:
@@ -32,8 +35,8 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
     default:
       return state;
   }
-  
 }
+
 
 const initialMessageState = ''
 
@@ -60,7 +63,7 @@ function form(state = initialFormState, action) {
         ...action.payload,
       };
     case types.RESET_FORM:
-      return { initialFormState };
+      return { ...initialFormState };
     default:
       return state;
   }

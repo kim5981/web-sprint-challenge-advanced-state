@@ -61,7 +61,7 @@ export function fetchQuiz() {
             dispatch(fetchQuiz());
           })
           .catch((err) => {
-            dispatch(setMessage(err.response.data.message));
+            console.error(err)
           })
     }
   }
@@ -70,7 +70,7 @@ export function fetchQuiz() {
 export function postQuiz({ question_text, true_answer_text, false_answer_text }) {
   return function (dispatch) {
     axios.post("http://localhost:9000/api/quiz/new", {
-      question_text,
+        question_text,
         true_answer_text,
         false_answer_text
     })
@@ -80,7 +80,6 @@ export function postQuiz({ question_text, true_answer_text, false_answer_text })
     })
     .catch( err => {
       console.error(err)
-      dispatch(setMessage(err.response.data.message))
     })
   }
 }
