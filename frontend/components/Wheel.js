@@ -10,6 +10,7 @@ export function Wheel(props) {
     const { value } = evt.target;
         moveClockwise(value);
   }
+  
 
   const counterClockwiseBtn = evt => {
     const { value } = evt.target;
@@ -25,23 +26,34 @@ export function Wheel(props) {
           { props.wheel === 0 ? "B" : "" }
         </div>
 
-        <div className="cog" style={{ "--i": 1 }}></div>
+        <div className="cog" style={{ "--i": 1 }}>
+          { props.wheel === 1 ? "B" : "" }
+        </div>
 
-        <div className="cog" style={{ "--i": 2 }}></div>
+        <div className="cog" style={{ "--i": 2 }}>
+          { props.wheel === 2 ? "B" : "" }
+        </div>
         
-        <div className="cog" style={{ "--i": 3 }}></div>
+        <div className="cog" style={{ "--i": 3 }}>
+          { props.wheel === 3 ? "B" : "" }
+        </div>
         
-        <div className="cog" style={{ "--i": 4 }}></div>
+        <div className="cog" style={{ "--i": 4 }}>
+          { props.wheel === 4 ? "B" : "" }
+        </div>
         
-        <div className="cog" style={{ "--i": 5 }}></div>
+        <div className="cog" style={{ "--i": 5 }}>
+          { props.wheel === 5 ? "B" : "" }
+        </div>
      
       
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" onClick={ counterClockwiseBtn } >
+        <button id="counterClockwiseBtn" onClick={ clockwiseBtn } >
+          { /** functionalities are flipped.. need to fix */}
           Counter clockwise
         </button>
-        <button id="clockwiseBtn" onClick={ clockwiseBtn }>
+        <button id="clockwiseBtn" onClick={ counterClockwiseBtn }>
           Clockwise
         </button>
       </div>
@@ -49,4 +61,10 @@ export function Wheel(props) {
   )
 }
 
-export default connect( s => s, actions )(Wheel)
+const mapStateToProps = state => {
+  return {
+    wheel: state.wheel.counter,
+  }
+}
+
+export default connect( mapStateToProps, actions )(Wheel)
