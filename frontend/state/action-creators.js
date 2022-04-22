@@ -4,16 +4,16 @@ import axios from "axios";
 // ❗ You don't need to add extra action creators to achieve MVP
 
 
-export function moveClockwise(input) {
-  return { type: types.MOVE_CLOCKWISE, payload: input }
+export function moveClockwise(value) {
+  return { type: types.MOVE_CLOCKWISE, payload: value }
  }
 
-export function moveCounterClockwise(input) { 
-  return { type: types.MOVE_COUNTERCLOCKWISE, payload: input }
+export function moveCounterClockwise() { 
+  return { type: types.MOVE_COUNTERCLOCKWISE }
 }
 
-export function selectAnswer(answer_id) {
-  return { type: types.SET_SELECTED_ANSWER, payload: answer_id }
+export function selectAnswer(answerId) {
+  return { type: types.SET_SELECTED_ANSWER, payload: answerId }
  }
 
 export function setMessage(msg) { 
@@ -39,7 +39,6 @@ export function resetForm() {
 
 export function fetchQuiz() {
   return function (dispatch) {
-    dispatch(setQuiz(false));
     axios.get(`http://localhost:9000/api/quiz/next`)
       .then(res => {
         dispatch(setQuiz(res.data))
@@ -58,8 +57,8 @@ export function fetchQuiz() {
           .then((res) => {
             dispatch(selectAnswer(null));
             dispatch(setMessage(res.data.message));
+            dispatch(setQuiz(null));
             dispatch(fetchQuiz());
-            dispatch(setMessage(res.data.message));
           })
           .catch((err) => {
             dispatch(setMessage(err.response.data.message));

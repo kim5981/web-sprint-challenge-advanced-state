@@ -7,19 +7,23 @@ import { fetchQuiz, selectAnswer, postAnswer } from "../state/action-creators";
 function Quiz(props) {
   const { quiz, fetchQuiz, selectedAnswer, selectAnswer, postAnswer } = props;
 
+  useEffect( () => {
+    fetchQuiz()
+   }, []);
+
   const selectHandler = (answer_id) => {
     selectAnswer(answer_id)
   } 
 
   const onSubmit = evt => {
     evt.preventDefault()
-    postAnswer(quiz.quiz_id, selectedAnswer);
+    postAnswer(
+      {
+        quiz_id: quiz.quiz_id,
+        answer_id: selectedAnswer,
+      }
+    );
   }
-
-  quiz === null && 
-    useEffect( () => {
-      fetchQuiz()
-     }, []);
 
   return (
     <div id="wrapper">
@@ -56,7 +60,7 @@ function Quiz(props) {
               
                 { quiz.answers[1].text }
 
-                <button>
+                <button onClick={ () => selectHandler(quiz.answers[1].answer_id) }>
                   { selectedAnswer === quiz.answers[0].answer_id 
                   ? "SELECTED" 
                   : "Select" }
