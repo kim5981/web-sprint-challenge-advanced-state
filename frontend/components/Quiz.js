@@ -11,18 +11,15 @@ function Quiz(props) {
     selectAnswer(answer_id)
   } 
 
-  // get data from api on load
-  useEffect( () => {
-    fetchQuiz()
-  }, []);
-
   const onSubmit = evt => {
     evt.preventDefault()
-    postAnswer({
-      quiz_id: quiz.quiz_id,
-      answer_id: selectedAnswer,
-    })
+    postAnswer(quiz.quiz_id, selectedAnswer);
   }
+
+  quiz === null && 
+    useEffect( () => {
+      fetchQuiz()
+     }, []);
 
   return (
     <div id="wrapper">

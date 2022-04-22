@@ -12,8 +12,8 @@ export function moveCounterClockwise(input) {
   return { type: types.MOVE_COUNTERCLOCKWISE, payload: input }
 }
 
-export function selectAnswer(id) {
-  return { type: types.SET_SELECTED_ANSWER, payload: id }
+export function selectAnswer(answer_id) {
+  return { type: types.SET_SELECTED_ANSWER, payload: answer_id }
  }
 
 export function setMessage(msg) { 
@@ -51,14 +51,15 @@ export function fetchQuiz() {
 }
 
 
-    export function postAnswer(quiz_id, answer_id) {
+    export function postAnswer({ quiz_id, answer_id }) {
       return function (dispatch) {
         axios
           .post("http://localhost:9000/api/quiz/answer", { quiz_id, answer_id })
           .then((res) => {
-            dispatch({ type: types.SET_SELECTED_ANSWER, payload: null });
+            dispatch(selectAnswer(null));
             dispatch(setMessage(res.data.message));
             dispatch(fetchQuiz());
+            dispatch(setMessage(res.data.message));
           })
           .catch((err) => {
             dispatch(setMessage(err.response.data.message));
@@ -67,16 +68,16 @@ export function fetchQuiz() {
   }
 
 
-export function postQuiz(question, correct, incorrect) {
+export function postQuiz({ question_text, true_answer_text, false_answer_text }) {
   return function (dispatch) {
     axios.post("http://localhost:9000/api/quiz/new", {
-      question_text: question,
-        true_answer_text: correct,
-        false_answer_text: incorrect,
+      question_text,
+        true_answer_text,
+        false_answer_text
     })
     .then(res => {
-      dispatch(setMessage(`Question: ${res.data.question}`))
-      dispatch(resetForm()) // invoke w/i dispatch
+      dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
+      dispatch(resetForm())
     })
     .catch( err => {
       console.error(err)
