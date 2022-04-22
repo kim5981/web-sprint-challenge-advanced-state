@@ -3,10 +3,38 @@ import { combineReducers } from 'redux'
 
 import * as types from "./action-types"
 
-const initialWheelState = 0
+const initialWheelState = { counter: 0 }
+// state.counter = 0
 
 function wheel(state = initialWheelState, action) {
-  return state
+  switch (action.type) {
+    case types.MOVE_CLOCKWISE :
+      if ( state.counter >= - 1) {
+        return {
+          ...state,
+          counter: state.counter - 1,
+        }
+      } else {
+        return {
+          ...state,
+          counter: 5,
+        }
+      }
+    case types.MOVE_COUNTERCLOCKWISE :
+      if ( state.counter <= 4) {
+        return {
+          ...state,
+          counter: state.counter + 1
+        }
+      } else {
+        return {
+          ...state,
+          counter: 0
+        }
+      }
+    default:
+      return state; 
+  }
 }
 
 

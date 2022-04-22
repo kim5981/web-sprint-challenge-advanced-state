@@ -89,8 +89,8 @@ nav a.active {
 }
 
 #keypad {
-  background-color: rgb(252, 252, 252);
-  border: 1px solid rgb(238, 238, 238);
+  background-color: rgb(32, 87, 97);
+  border: 1px solid rgb(0, 57, 65);
   padding: 0.55rem;
   width: 100%;
   display: flex;
@@ -100,7 +100,7 @@ nav a.active {
 button:active {
   box-shadow: 0 0 5px #93005a;
   border: 1px solid #93005a;
-  background-color: white;
+  background-color: rgb(60, 80, 82);
 }
 
 button:disabled {
