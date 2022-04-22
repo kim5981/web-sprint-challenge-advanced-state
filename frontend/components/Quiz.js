@@ -31,10 +31,11 @@ function Quiz(props) {
             <h2>{ quiz.question }</h2>
 
             <div id="quizAnswers">
+
               { /*answer 1*/}
-              <div className={ `answer ${ selectedAnswer === quiz.answers[0]
-                ? "selected"
-                : null }`}
+              <div className={ `${ selectedAnswer === quiz.answers[0].answer_id
+                ? "selected answer"
+                : "answer" }`}
               >
                 { quiz.answers[0].text }
                 <button onClick={ () => selectHandler(quiz.answers[0].answer_id) }>
@@ -44,8 +45,11 @@ function Quiz(props) {
                 </button>
               </div>
 
-              <div className="answer">
-              { /*answer 1*/}
+              { /*answer 2*/}
+              <div className={ `${ selectedAnswer === quiz.answers[1].answer_id
+                ? "selected answer"
+                : "answer" }`}>
+              
                 An elephant
                 <button>
                   Select
