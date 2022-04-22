@@ -8,7 +8,7 @@ export function Form(props) {
 
   const onChange = evt => {
     const { value, id } = evt.target
-    inputChange(value, id); 
+    inputChange(id, value); 
   }
 
   const onSubmit = evt => {
@@ -17,7 +17,14 @@ export function Form(props) {
   }
 
   const disabledBtnHandler = () => {
-    return null
+      if (
+        form.newQuestion.trim().length > 0 &&
+      form.newTrueAnswer.trim().length > 0 &&
+      form.newFalseAnswer.trim().length > 0
+      ) {
+        return ""
+      }
+      return "disabled"
   }
 
   return (
